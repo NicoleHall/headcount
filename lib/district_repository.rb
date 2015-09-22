@@ -1,3 +1,6 @@
+require 'pry'
+require 'CSV'
+
 class DistrictRepository
 
   # def initialize(#i want it to have all the data available)
@@ -5,7 +8,14 @@ class DistrictRepository
   # end
 
   def self.from_csv(path)
-    new #this will return a new dist repository instance(just the word new)
+    fullpath = File.join(path, "Students qualifying for free or reduced price lunch.csv")
+    rows = CSV.read(fullpath, headers: true, header_converters: :symbol)
+    # binding.pry
+
+
+    # rows.each do |row|
+
+    #this will return a new dist repository instance(just the word new)
   end
 
   def find_by_name(district_name)
