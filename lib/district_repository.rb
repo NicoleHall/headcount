@@ -10,7 +10,7 @@ class DistrictRepository
   def self.from_csv(path)
     fullpath = File.join(path, "Students qualifying for free or reduced price lunch.csv")
     rows = CSV.read(fullpath, headers: true, header_converters: :symbol)
-    # binding.pry
+    binding.pry
 
 
     # rows.each do |row|
@@ -30,6 +30,15 @@ class EconomicProfile
 end
 
 class District
+
+    def name
+    end
+
+    def state_wide_testing
+    end
+
+    def enrollment
+    end
 
   def economic_profile
     EconomicProfile.new
