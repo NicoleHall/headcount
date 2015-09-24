@@ -15,8 +15,7 @@ class TestEconomicProfile < Minitest::Test
     assert_equal 0.125, district.economic_profile.free_or_reduced_lunch_in_year(2012)
   end
 end
-#    district = contents.map{ |rows|[rows.fetch(:location).upcase, {}]}.to_h
-
+#    
 # class TestDistric < Minitest::Test
 #
 #   def test_it_has_a_class
