@@ -3,34 +3,28 @@ require 'CSV'
 
 class DistrictRepository
 
-  def from_csv(path)
-    # file = "Students qualifying for free or reduced price lunch.csv"
-    # fullpath = File.join(path, file)
-    # contents = (CSV.open "../headcount/data/Students qualifying for free or reduced price lunch.csv", headers: true, header_converters: :symbol)
-    # district = []
-    # contents.each do |row|
-    #   district << row.to_a
-    #   end
-    #   district
+   def from_csv(path)
     contents = CSV.foreach("../headcount/data/Students qualifying for free or reduced price lunch.csv", headers: true, header_converters: :symbol)
-    contents.map {|row| row.to_h}
-    # district = contents.map { |rows| [rows.fetch(:location).upcase, {}]}.to_h
-    #maybe not have all the stuffs come in?
-
+    districts = contents.map {|row| row.to_h}
+    find_by_district_name = districts.group_by do |district|
+      district.fetch(:location)
+    end
+    find_by_district_name
    end
 
    def initialize(path)#i want it to have all the data available)
-    @districts = from_csv(path)
+    @repository = from_csv(path)
    end
 
     # binding.pry
   #  districts#this will return a new dist repository instance(just the word new)
 
   def find_by_name(district_name)
-    @districts.detect do |district|
+    district = @repository.select do |district|
         district == district_name
     end
-    District.new(district_name)
+    binding.pry
+    District.new(district)
   end
 end
 
@@ -38,7 +32,7 @@ class EconomicProfile
 attr_reader
 
   def initialize(district_name)
-    @name = district_name
+    @economic_data = district_name
   end
 
   # def from_csv(path)
@@ -57,11 +51,11 @@ attr_reader
 end
 
 class District
-attr_reader :name
-            :location
+attr_reader :district_data
 
- def initialize(name)
-    @name = name
+ def initialize(district_data)
+    binding.pry
+    @district_data = district_data
   end
 
   def name
@@ -74,7 +68,7 @@ attr_reader :name
   end
 
   def economic_profile
-  EconomicProfile.new(@name)
+  EconomicProfile.new(district_data)
   end
 
 end
