@@ -8,22 +8,25 @@ FAKE_CSV_DATA = <<-CSV
 Location,Data
 Foo,1
 Bar,2
+Foo,3
 CSV
 
 class CsvReaderTest < Minitest::Test
   def test_determining_if_a_location_with_a_name_exists
     csv_reader = CsvReader.new(FAKE_CSV_DATA)
-    bar_row = { "Location" => "Bar", "Data" => "2" }
-    foo_row = { "Location" => "Foo", "Data" => "1" }
-    assert_equal bar_row, csv_reader.row_for_location("Bar")
-    assert_equal foo_row, csv_reader.row_for_location("Foo")
-    assert_nil csv_reader.row_for_location("Baz")
+    bar_rows = [{ "Location" => "Bar", "Data" => "2" }]
+    foo_rows = [
+      { "Location" => "Foo", "Data" => "1" },
+      { "Location" => "Foo", "Data" => "3" },
+    ]
+    assert_equal bar_rows, csv_reader.rows_for_location("Bar")
+    assert_equal foo_rows, csv_reader.rows_for_location("Foo")
+    assert_nil csv_reader.rows_for_location("Baz")
   end
 
   def test_location_exists_is_case_insensitive
     csv_reader = CsvReader.new(FAKE_CSV_DATA)
-    foo_row = { "Location" => "Foo", "Data" => "1" }
-    assert_equal foo_row, csv_reader.row_for_location("FOO")
-    assert_equal foo_row, csv_reader.row_for_location("foo")
+    refute_nil csv_reader.rows_for_location("FOO")
+    refute_nil csv_reader.rows_for_location("foo")
   end
 end

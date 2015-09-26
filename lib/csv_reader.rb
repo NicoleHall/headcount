@@ -5,13 +5,13 @@ class CsvReader
     @data = CSV.new(data, headers: true).to_a
   end
 
-  def row_for_location(location_name)
-    row = data.find do |row|
+  def rows_for_location(location_name)
+    row = data.select do |row|
       row["Location"].upcase == location_name.upcase
     end
-    
-    if row
-      row.to_h
+
+    if row.any?
+      row.map(&:to_h)
     end
   end
 
