@@ -10,7 +10,8 @@ class DistrictRepository
   def find_by_name(name)
     data = csv_reader.rows_for_location(name)
     if data
-      District.new(name.upcase)
+      economic_profile = EconomicProfile.new(data)
+      District.new(name.upcase, economic_profile)
     end
   end
 

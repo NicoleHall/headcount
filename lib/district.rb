@@ -1,13 +1,10 @@
 require "economic_profile"
 
 class District
-  attr_reader :name
+  attr_reader :name, :economic_profile
 
-  def initialize(name)
+  def initialize(name, economic_profile)
     @name = name
-  end
-
-  def economic_profile
-    EconomicProfile.new
+    @economic_profile = economic_profile
   end
 end
