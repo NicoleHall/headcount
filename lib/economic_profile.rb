@@ -1,10 +1,11 @@
 class EconomicProfile
-  def initialize(data)
-    @data = data
+  def initialize(free_lunch_data, household_income_data)
+    @free_lunch_data = free_lunch_data
+    @household_income_data = household_income_data
   end
 
   def free_or_reduced_lunch_by_year
-    matching_rows = data.select do |row|
+    matching_rows = free_lunch_data.select do |row|
       row_is_free_or_reduced_lunch?(row) &&
         row_is_percent?(row)
     end
@@ -20,7 +21,7 @@ class EconomicProfile
 
   protected
 
-  attr_reader :data
+  attr_reader :free_lunch_data, :household_income_data
 
   private
 

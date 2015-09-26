@@ -2,7 +2,7 @@ require 'csv'
 
 class CsvReader
   def initialize(data)
-    @data = CSV.new(data, headers: true).to_a
+    @data = CSV.new(data, headers: true)
   end
 
   def rows_for_location(location_name)
@@ -15,7 +15,9 @@ class CsvReader
     end
   end
 
-  protected
+  private
 
-  attr_reader :data
+  def data
+    @array_data ||= @data.to_a
+  end
 end
