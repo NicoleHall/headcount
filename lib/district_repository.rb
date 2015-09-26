@@ -10,7 +10,7 @@ class DistrictRepository
   def find_by_name(name)
     data = csv_reader.row_for_location(name)
     if data
-      District.new(data["Location"])
+      District.new(name.upcase)
     end
   end
 

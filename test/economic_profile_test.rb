@@ -8,11 +8,11 @@ require 'pry'
 
 class TestEconomicProfile < Minitest::Test
   def test_free_or_reduced_lunch_in_year
+    skip
     path = File.expand_path("../data", __dir__)
     repository = DistrictRepository.new(path)
     district   = repository.find_by_name("ACADEMY 20")
     assert_equal 0.125, district.economic_profile.free_or_reduced_lunch_in_year(2012)
-    # assert_equal 0.127,
-    # district.economic_profile.free_or_reduced_lunch_in_year(2014)
+    assert_equal 0.127, district.economic_profile.free_or_reduced_lunch_in_year(2014)
   end
 end
