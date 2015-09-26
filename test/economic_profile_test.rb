@@ -12,5 +12,7 @@ class TestEconomicProfile < Minitest::Test
     repository = DistrictRepository.new(path)
     district   = repository.find_by_name("ACADEMY 20")
     assert_equal 0.125, district.economic_profile.free_or_reduced_lunch_in_year(2012)
+    # assert_equal 0.127,
+    # district.economic_profile.free_or_reduced_lunch_in_year(2014)
   end
 end

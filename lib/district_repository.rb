@@ -5,6 +5,6 @@ class DistrictRepository
   end
 
   def find_by_name(name)
-    District.new
+    District.new(name)
   end
 end
