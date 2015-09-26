@@ -8,8 +8,9 @@ class DistrictRepository
   end
 
   def find_by_name(name)
-    if csv_reader.location_exists?(name)
-      District.new(name)
+    data = csv_reader.row_for_location(name)
+    if data
+      District.new(data["Location"])
     end
   end
 

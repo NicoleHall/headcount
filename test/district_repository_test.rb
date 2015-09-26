@@ -15,6 +15,8 @@ class DistrictRespositoryTest < Minitest::Test
   end
 
   def test_find_by_name_performs_a_case_insensitive_search
+    assert_equal "ACADEMY 20", district_repository.find_by_name("academy 20").name
+    assert_equal "Colorado", district_repository.find_by_name("COLORADO").name
   end
 
   private
