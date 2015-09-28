@@ -5,14 +5,16 @@ class DistrictRepository
   def initialize(path)
     @data_path = path
     @free_lunch_data = read_data_from_file("Students qualifying for free or reduced price lunch.csv")
-    @household_income_data = read_data_from_file("Median household income.csv")
+    @median_household_income_data = read_data_from_file("Median household income.csv")
+    @school_aged_children_in_poverty = read_data_from_file("School-aged children in poverty.csv")
+    @title_i_students = read_data_from_file("Title I students.csv")
   end
 
   def find_by_name(name)
     if district_exists?(name)
       economic_profile = EconomicProfile.new(
         free_lunch_data_for_district(name),
-        household_income_data_for_district(name),
+        median_household_income_data_for_district(name),
       )
       District.new(name.upcase, economic_profile)
     end
@@ -20,7 +22,7 @@ class DistrictRepository
 
   protected
 
-  attr_reader :data_path, :free_lunch_data, :household_income_data
+  attr_reader :data_path, :free_lunch_data, :median_household_income_data, :school_aged_children_in_poverty, :title_i_students
 
   private
 
@@ -38,7 +40,7 @@ class DistrictRepository
     free_lunch_data.rows_for_location(name)
   end
 
-  def household_income_data_for_district(name)
-    household_income_data.rows_for_location(name)
+  def median_household_income_data_for_district(name)
+    median_household_income_data.rows_for_location(name)
   end
 end

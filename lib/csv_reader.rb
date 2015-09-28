@@ -15,6 +15,11 @@ class CsvReader
     end
   end
 
+  def load_pupil_enrollment
+    rows = CSV.read('/Users/FatMac/turing/module_one_take_two/projects/headcount/data/Pupil enrollment.csv', headers: true, header_converters: :symbol).map(&:to_h)
+    require 'pry'; binding.pry
+  end
+
   private
 
   def data

@@ -1,7 +1,7 @@
 $LOAD_PATH.unshift(File.expand_path("../../lib", __FILE__))
 
 require 'minitest/autorun'
-require 'minitest/emoji'
+require 'minitest/pride'
 require 'district_repository'
 require 'pry'
 
@@ -18,6 +18,18 @@ class TestEconomicProfile < Minitest::Test
     district   = repository.find_by_name("ACADEMY 20")
     assert_equal 0.125, district.economic_profile.free_or_reduced_lunch_in_year(2012)
     assert_equal 0.127, district.economic_profile.free_or_reduced_lunch_in_year(2014)
+  end
+
+  def test_nil_is_returned_when_invalid_year_is_searched
+    repository = district_repository
+    district   = repository.find_by_name("ACADEMY 20")
+    assert_equal nil, district.economic_profile.free_or_reduced_lunch_in_year(2025)
+  end
+
+  def test_school_aged_children_in_poverty_in_year
+    repository = district_repository
+    district   = repository.find_by_name("ACADEMY 20")
+    district.school_aged_children_in_poverty_in_year(1995)
   end
 
   private

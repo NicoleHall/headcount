@@ -1,7 +1,9 @@
 class EconomicProfile
-  def initialize(free_lunch_data, household_income_data)
+  def initialize(free_lunch_data, median_household_income_data)
     @free_lunch_data = free_lunch_data
-    @household_income_data = household_income_data
+    @median_household_income_data = median_household_income_data
+    @school_aged_children_in_poverty = school_aged_children_in_poverty
+    @title_i_students = title_i_students
   end
 
   def free_or_reduced_lunch_by_year
@@ -19,9 +21,11 @@ class EconomicProfile
     free_or_reduced_lunch_by_year[year]
   end
 
+
+
   protected
 
-  attr_reader :free_lunch_data, :household_income_data
+  attr_reader :free_lunch_data, :median_household_income_data, :school_aged_children_in_poverty, :title_i_students
 
   private
 
