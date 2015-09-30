@@ -2,11 +2,13 @@ require_relative 'test_helper'
 
 class TestStatewideTesting < TestHarness
   class ProficientByGrade < TestStatewideTesting
+
     def test_it_accepts_grades_of_3_and_8
       assert a20.statewide_testing.proficient_by_grade(3)
       assert a20.statewide_testing.proficient_by_grade(8)
     end
 
+    meta :kjdhfakljdf => true
     def test_grades_outside_the_accepted_domain_raise_an_UnknownDataError
       assert_raises UnknownDataError do
         a20.statewide_testing.proficient_by_grade(4)

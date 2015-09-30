@@ -1,6 +1,9 @@
 require 'district'
 require 'district_repository'
 
+class UnknownDataError < StandardError
+end
+
 class StatewideTesting
   attr_accessor :data
 
@@ -16,6 +19,28 @@ class StatewideTesting
       syag.fetch("year")    == year
     end
     result.fetch("proficiency")
+  end
+
+  def proficient_by_grade(grade)
+    raise UnknownDataError unless grade == 3 || grade == 8
+    results = @statewide_testing_data.fetch("by_subject_year_and_grade")
+
+    filtered_by_grade = results.select do |row|
+      row if row["grade"] == grade
+    end
+    years = {}
+    filtered_by_grade.map do |row|
+      years[row['year']] = {}
+    end
+
+    years.each_pair do |year, hash|
+      filtered_by_grade.each do |row|
+        if row["year"] == year
+          hash[row["subject"].to_sym] = row["proficiency"]
+        end
+      end
+    end
+    years
   end
 
 end
