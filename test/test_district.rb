@@ -1,7 +1,6 @@
 require_relative 'test_helper'
 
 class TestDistrict < TestHarness
-
   def test_name_returns_the_upcased_string_name_of_the_district
     assert_equal 'COLORADO', repo.find_by_name('colorado').name
   end

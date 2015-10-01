@@ -1,5 +1,6 @@
 require 'json'
 require "district"
+
 class DistrictRepository
   def self.from_json(filename)
     data = JSON.parse(File.read(filename))

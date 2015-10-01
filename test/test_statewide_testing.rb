@@ -65,7 +65,6 @@ class TestStatewideTesting < TestHarness
       end
     end
 
-    meta :kjdhfakljdf => true
     def test_it_returns_a_hash_grouped_by_race_referencing_percentages_by_subject_all_as_truncated_three_digit_floats
       actual   = a20.statewide_testing.proficient_by_race_or_ethnicity(:asian)
       expected = {

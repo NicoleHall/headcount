@@ -1,6 +1,7 @@
 require_relative 'test_helper'
 
 class TestEnrollment < TestHarness
+
   class TestDropoutRateInYear < TestEnrollment
     def test_unknown_years_return_nil
       assert_equal nil, a20.enrollment.dropout_rate_in_year(232323322332)
@@ -57,7 +58,6 @@ class TestEnrollment < TestHarness
     end
   end
 
-
   class DropoutRateForRaceOrEthnicityInYear < TestEnrollment
     def test_unknown_years_return_nil
       assert_equal nil, a20.enrollment.dropout_rate_for_race_or_ethnicity_in_year(:asian, 232323322332)
@@ -69,7 +69,7 @@ class TestEnrollment < TestHarness
       end
     end
 
-    def accepts_the_known_races
+    def test_accepts_the_known_races
       [:asian, :black, :pacific_islander, :hispanic, :native_american, :two_or_more, :white].each do |race|
         assert a20.enrollment.dropout_rate_for_race_or_ethnicity_in_year(race, 2012)
       end
