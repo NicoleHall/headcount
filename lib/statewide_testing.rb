@@ -1,8 +1,6 @@
+require 'error'
 require 'district'
 require 'district_repository'
-
-class UnknownDataError < StandardError
-end
 
 class StatewideTesting
   attr_accessor :data
@@ -43,4 +41,37 @@ class StatewideTesting
     years
   end
 
-end
+  def proficient_by_race_or_ethnicity(race)
+    hash = @statewide_testing_data.fetch("by_subject_year_and_race")
+    filtered_by_race = hash.select { |hash| hash['race'].to_sym == race}
+    filtered = filtered_by_race.group_by { |e| e["year"] }
+    filtered.each do |year, data| n = {}; data.each do |d| n[d["subject"]] = d["proficiency"] end; hash[year] = n
+    end
+
+    require 'pry'; binding.pry
+  end
+
+
+
+
+
+
+
+
+ #  def proficient_by_race_or_ethnicity(race)
+ #    results = @statewide_testing_data.fetch("by_subject_year_and_race")
+ #    years = {}
+ #    results.map do |row|
+ #      years[row['race']] = row['proficiency']
+ #    end
+ #     years.each_pair do |year, hash|
+ #       results.each do |row|
+ #         if row["year"] == year
+ #           hash[row["subject"].to_sym] = row["proficiency"]
+ #         end
+ #     end
+ #    end
+ #    years
+ #    require 'pry'; binding.pry
+ #  end
+  end

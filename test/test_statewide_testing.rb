@@ -8,7 +8,7 @@ class TestStatewideTesting < TestHarness
       assert a20.statewide_testing.proficient_by_grade(8)
     end
 
-    meta :kjdhfakljdf => true
+
     def test_grades_outside_the_accepted_domain_raise_an_UnknownDataError
       assert_raises UnknownDataError do
         a20.statewide_testing.proficient_by_grade(4)
@@ -28,6 +28,7 @@ class TestStatewideTesting < TestHarness
       }
       assert_equal expected, actual
     end
+
 
     def test_it_omits_LNE_Excel_bullshit_0s_and_missing_data
       # Writing,2013,Percent,LNE
@@ -50,6 +51,8 @@ class TestStatewideTesting < TestHarness
 
 
   class ProficientByRaceOrEthnicity < TestStatewideTesting
+
+
     def test_it_accepts_any_race_from_the_domain_of_asian___black___pacific_islander___hispanic___native_american___two_or_more___white
       [:asian, :black, :pacific_islander, :hispanic, :native_american, :two_or_more, :white].each do |race|
         assert a20.statewide_testing.proficient_by_race_or_ethnicity(race)
@@ -62,6 +65,7 @@ class TestStatewideTesting < TestHarness
       end
     end
 
+    meta :kjdhfakljdf => true
     def test_it_returns_a_hash_grouped_by_race_referencing_percentages_by_subject_all_as_truncated_three_digit_floats
       actual   = a20.statewide_testing.proficient_by_race_or_ethnicity(:asian)
       expected = {
